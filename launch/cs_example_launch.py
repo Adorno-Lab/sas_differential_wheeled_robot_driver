@@ -21,7 +21,7 @@ def generate_launch_description():
             package='sas_differential_wheeled_robot_driver',
             executable='sas_differential_wheeled_robot_driver_node',
             name='pioneer_1',
-            namespace="sas_pioneer",
+            namespace="sas_mobile_robot",
             output="screen",
             parameters=[{
                 "wheel_radius": 0.1,
