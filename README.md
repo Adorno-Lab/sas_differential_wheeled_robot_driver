@@ -4,8 +4,6 @@
 
 A sas driver implementation for differential mobile robots on CoppeliaSim
 
-
-
 ## Launch the driver
 
 ```shell
