@@ -24,6 +24,12 @@ ros2 topic echo /sas_mobile_robot/pioneer_1/get/joint_states
 ros2 topic pub /sas_mobile_robot/pioneer_1/set/target_joint_velocities std_msgs/msg/Float64MultiArray "layout:
   dim: []
   data_offset: 0
-data: [0.1, 0.0, 0.0]"
+data: [0.1, 0.0, 1.0]"
 ```
+
+
+
+
+https://github.com/user-attachments/assets/aa7d553b-b273-49fa-b1d3-66d5f09696cd
+
 
