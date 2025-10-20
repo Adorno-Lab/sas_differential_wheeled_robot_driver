@@ -63,6 +63,10 @@ DifferentialWheeledRobotDriver::DifferentialWheeledRobotDriver(const Differentia
 {
     impl_ = std::make_unique<DifferentialWheeledRobotDriver::Impl>();
     impl_->cs_ = std::make_shared<DQ_CoppeliaSimInterfaceZMQ>();
+
+    VectorXd joint_limits_min = Eigen::VectorXd::Constant(3, -std::numeric_limits<double>::infinity());
+    VectorXd joint_limits_max = Eigen::VectorXd::Constant(3,  std::numeric_limits<double>::infinity());
+    joint_limits_ = {joint_limits_min, joint_limits_max};
 }
 
 

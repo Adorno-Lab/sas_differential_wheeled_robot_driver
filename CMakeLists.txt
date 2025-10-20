@@ -84,12 +84,24 @@ add_executable(${RCLCPP_LOCAL_BINARY_NAME}
     src/sas_differential_wheeled_robot_driver_node.cpp
     )
 
+add_executable(open_loop_test
+    src/open_loop_test.cpp
+)
+
 ament_target_dependencies(${RCLCPP_LOCAL_BINARY_NAME}
     rclcpp
     sas_common
     sas_core
     sas_robot_driver
 )
+
+ament_target_dependencies(open_loop_test
+    rclcpp
+    sas_common
+    sas_core
+    sas_robot_driver
+)
+
 
 
 target_link_libraries(${RCLCPP_LOCAL_BINARY_NAME}
@@ -100,15 +112,30 @@ target_include_directories(${RCLCPP_LOCAL_BINARY_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
+target_include_directories(open_loop_test PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+
 target_compile_features(${RCLCPP_LOCAL_BINARY_NAME} PUBLIC c_std_99 cxx_std_20)
+target_compile_features(open_loop_test PUBLIC c_std_99 cxx_std_20)
 
 install(TARGETS ${RCLCPP_LOCAL_BINARY_NAME}
     DESTINATION lib/${PROJECT_NAME})
+
+install(TARGETS open_loop_test
+    DESTINATION lib/${PROJECT_NAME})
+
 
 unset(RCLCPP_LOCAL_BINARY_NAME)
 # ^^^^^^^^^^^^^^^^^^^^^^ #
 # CPP Binary Block [END] #
 ##########################
+
+
+
+
+
+
 
 
 
