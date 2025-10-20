@@ -3,3 +3,27 @@
 # sas_differential_wheeled_robot_drive
 
 A sas driver implementation for differential mobile robots on CoppeliaSim
+
+
+
+## Launch the driver
+
+```shell
+ros2 launch sas_differential_wheeled_robot_driver cs_example_launch.py
+```
+
+## Get the robot configuration
+
+```shell
+ros2 topic echo /sas_mobile_robot/pioneer_1/get/joint_states 
+```
+ 
+## Move your robot
+
+```shell
+ros2 topic pub /sas_mobile_robot/pioneer_1/set/target_joint_velocities std_msgs/msg/Float64MultiArray "layout:
+  dim: []
+  data_offset: 0
+data: [0.1, 0.0, 0.0]"
+```
+
