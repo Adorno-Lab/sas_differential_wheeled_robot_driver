@@ -18,22 +18,21 @@ def generate_launch_description():
                     default_value='30'
                 ),
         Node(
-            package='sas_robot_driver_unitree_z1',
-            executable='sas_robot_driver_unitree_z1_node',
-            name='z1_1',
-            namespace="sas_z1",
+            package='sas_differential_wheeled_robot_driver',
+            executable='sas_differential_wheeled_robot_driver_node',
+            name='pioneer_1',
+            namespace="sas_pioneer",
             output="screen",
             parameters=[{
-                "robot_name": "z1_1",
-                "thread_sampling_time_sec": 0.002,
-                "mode": "RawPositionControl",   # e.g. "PositionControl" , "RawPositionControl"   
-                "gripper_attached": True,
-                "verbosity": True,      
-                "open_loop_joint_control_gain": 0.4,  
-                "move_robot_to_initial_configuration": True,
-                "initial_configuration": [0.0, 90.0,-60.0,-30.0, 0.0, -90.0], # [0.0, 1.57, -1.0, -0.54, 0.0, -1.57]  
-                "joint_limits_min": [-150.0, 0.0, -160.0, -80.0, -80.0, -160.0, 0.0],
-                "joint_limits_max": [150.0, 180.0, 0.0, 80.0, 80.0, 160.0, -40.0]
+                "wheel_radius": 0.1,
+                "distance_between_wheels":0.331,
+                "coppeliasim_robot_name": "PioneerP3DX", 
+                "coppeliasim_ip": "localhost",
+                "coppeliasim_port": 23000,
+                "coppeliasim_TIMEOUT_IN_MILISECONDS": 1000,
+                "left_motor_name": "PioneerP3DX/leftMotor",
+                "right_motor_name": "PioneerP3DX/rightMotor",
+                "thread_sampling_time_sec": 0.002,    
             }]
         ),
 

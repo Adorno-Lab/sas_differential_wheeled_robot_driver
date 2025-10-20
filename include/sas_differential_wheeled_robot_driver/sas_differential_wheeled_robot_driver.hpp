@@ -34,34 +34,38 @@ using namespace Eigen;
 namespace sas
 {
 
-struct MobileDriverConfiguration
+struct DifferentialWheeledRobotConfiguration
 {
-    bool gripper_attached;  //const bool gripper_attached = = true;
-    std::string mode;       //const std::string mode= "RawPositionControl";
-    bool verbosity;         //const bool verbosity = true;
-    std::tuple<VectorXd,VectorXd> joint_limits;
-    bool move_to_initial_configuration;  // Use true if you want to move the robot to the initial configuration
-    VectorXd initial_configuration;  // Custom initial configuration before starting the control loop
-    double open_loop_joint_control_gain; //Convergence rate when moving the robot to the initial and home configuration
+    double wheel_radius;
+    double distance_between_wheels;
+    std::string coppeliasim_robot_name;
+    std::string coppeliasim_ip;
+    int coppeliasim_port;
+    int coppeliasim_TIMEOUT_IN_MILISECONDS;
+    std::string left_motor_name;
+    std::string right_motor_name;
+    double thread_sampling_time_sec;
 };
 
 
-class RobotDriverUnitreeZ1: public RobotDriver
+class DifferentialWheeledRobotDriver: public RobotDriver
 {
 private:
-    MobileDriverConfiguration configuration_;
+    DifferentialWheeledRobotConfiguration configuration_;
 
     class Impl;
     std::unique_ptr<Impl> impl_;
 
+
+
 public:
 
-    RobotDriverUnitreeZ1(const RobotDriverUnitreeZ1&)=delete;
-    RobotDriverUnitreeZ1()=delete;
-    ~RobotDriverUnitreeZ1();
+    DifferentialWheeledRobotDriver(const DifferentialWheeledRobotDriver&)=delete;
+    DifferentialWheeledRobotDriver()=delete;
+    ~DifferentialWheeledRobotDriver();
 
-    RobotDriverUnitreeZ1(const RobotDriverUnitreeZ1Configuration &configuration,
-                         std::atomic_bool* break_loops);
+    DifferentialWheeledRobotDriver(const DifferentialWheeledRobotConfiguration &configuration,
+                                   std::atomic_bool* break_loops);
 
     VectorXd get_joint_positions() override;
     void set_target_joint_positions(const VectorXd& desired_joint_positions_rad) override;

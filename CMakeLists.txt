@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION VERSION 3.22...3.26)
-project(sas_mobile_robot_driver)
+project(sas_differential_wheeled_robot_driver)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -13,16 +16,6 @@ find_package(sas_core REQUIRED)
 find_package(sas_common REQUIRED)
 find_package(sas_robot_driver REQUIRED)
 
-##########################################################
-################## NOT ROS2 libraries  ###################
-##########################################################
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++17 -pthread")
-set(UNITREE_Z1_SDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/z1_sdk/)
-include_directories(${UNITREE_Z1_SDK_DIR}/include/)
-link_directories(${UNITREE_Z1_SDK_DIR}/lib/)
-
 
 ####################################
 # CPP Shared Library Block [BEGIN] #
@@ -31,20 +24,16 @@ link_directories(${UNITREE_Z1_SDK_DIR}/lib/)
 # The most common use case is to merge everything you need to export
 # into the same shared library called ${PROJECT_NAME}.
 add_library(${PROJECT_NAME} SHARED
-    src/sas_robot_driver_unitree_z1.cpp
-    src/DriverUnitreeZ1.cpp
-    src/DriverUnitreeZ1.hpp
-    src/constraints_manager.cpp
+    src/sas_differential_wheeled_robot_driver.cpp
     )
 target_link_libraries(${PROJECT_NAME}
-    Z1_SDK_${CMAKE_SYSTEM_PROCESSOR}
-    qpOASES
+    dqrobotics
+    dqrobotics-interface-coppeliasim-zmq
 )
 
 ament_target_dependencies(${PROJECT_NAME}
     sas_core
     Eigen3
-
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -89,10 +78,10 @@ install(
 # https://ros2-tutorial.readthedocs.io/en/latest/
 # While we cant use blocks https://cmake.org/cmake/help/latest/command/block.html#command:block
 # we use set--unset
-set(RCLCPP_LOCAL_BINARY_NAME sas_robot_driver_unitree_z1_node)
+set(RCLCPP_LOCAL_BINARY_NAME sas_differential_wheeled_robot_driver_node)
 
 add_executable(${RCLCPP_LOCAL_BINARY_NAME}
-    src/sas_robot_driver_unitree_z1_node.cpp
+    src/sas_differential_wheeled_robot_driver_node.cpp
     )
 
 ament_target_dependencies(${RCLCPP_LOCAL_BINARY_NAME}
@@ -105,8 +94,6 @@ ament_target_dependencies(${RCLCPP_LOCAL_BINARY_NAME}
 
 target_link_libraries(${RCLCPP_LOCAL_BINARY_NAME}
     ${PROJECT_NAME}
-    Z1_SDK_${CMAKE_SYSTEM_PROCESSOR}
-    qpOASES
 )
 
 target_include_directories(${RCLCPP_LOCAL_BINARY_NAME} PUBLIC
