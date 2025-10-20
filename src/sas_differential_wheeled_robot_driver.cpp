@@ -1,3 +1,28 @@
+/*
+# Copyright (c) 2025 Adorno-Lab
+#
+#    This is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Lesser General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public License.
+#    If not, see <https://www.gnu.org/licenses/>.
+#
+# ################################################################
+#
+#   Author: Juan Jose Quiroz Omana, email: juanjose.quirozomana@manchester.ac.uk
+#   Based on sas_robot_driver_ur.hpp
+#   (https://github.com/MarinhoLab/sas_robot_driver_ur/blob/main/include/sas_robot_driver_ur/sas_robot_driver_ur.hpp)
+#
+# ################################################################*/
+
+
 #include "sas_differential_wheeled_robot_driver/sas_differential_wheeled_robot_driver.hpp"
 #include <memory>
 #include <sas_core/eigen3_std_conversions.hpp>
@@ -58,7 +83,7 @@ VectorXd DifferentialWheeledRobotDriver::get_joint_positions()
 
 void DifferentialWheeledRobotDriver::set_target_joint_positions([[maybe_unused]] const VectorXd& desired_joint_positions_rad)
 {
-    //throw std::runtime_error(std::string(__FUNCTION__)+" is not available.");
+
 }
 
 /**
