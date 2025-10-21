@@ -2,7 +2,10 @@
 
 # sas_differential_wheeled_robot_driver
 
-A sas driver implementation for differential mobile robots on CoppeliaSim
+<img width="600" alt="capybara_mobile" src="https://github.com/user-attachments/assets/fa2baa6d-d547-4883-8946-c265f5d73efc" />
+
+
+A SAS driver implementation for differential mobile robots on CoppeliaSim
 
 ## Launch the driver
 
